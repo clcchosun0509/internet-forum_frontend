@@ -1,29 +1,26 @@
-import { DetailedHTMLProps, HTMLAttributes, useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { DetailedHTMLProps, HTMLAttributes, useEffect } from "react";
+import { useLocalStorage } from "usehooks-ts";
 type Props = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {};
 
 const Footer = ({ ...props }: Props) => {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useLocalStorage("theme", "dark");
 
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const renderThemeChanger = () => {
-    if (!mounted) return null;
-
-    const currentTheme = theme === "system" ? systemTheme : theme;
-
-    if (currentTheme === "dark") {
-      return <button onClick={() => setTheme("light")}>라이트 모드</button>;
-    }
-
-    return <button onClick={() => setTheme("dark")}>다크 모드</button>;
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
+  //modify data-theme attribute on document.body when theme changes
+  useEffect(() => {
+    const body = document.body;
+    body.setAttribute("data-theme", theme);
+  }, [theme]);
 
-  return <footer {...props}>{renderThemeChanger()}</footer>;
+  return (
+    <footer {...props} className="flex flex-col items-center m-4">
+      <button className="btn" onClick={toggleTheme}>
+        색상 반전
+      </button>
+    </footer>
+  );
 };
 
 export default Footer;

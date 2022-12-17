@@ -2,19 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+  font-family: "NanumSquareNeo";
+  font-style: normal;
+  font-weight: 300;
+  src: local(''), url('/fonts/NanumSquareNeoTTF-aLt.woff2') format('woff2');
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@font-face {
+  font-family: "NanumSquareNeo";
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/NanumSquareNeoTTF-bRg.woff2') format('woff2');
 }
 
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: "NanumSquareNeo";
+  font-style: normal;
+  font-weight: 700;
+  src: local(''), url('/fonts/NanumSquareNeoTTF-cBd.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: "NanumSquareNeo";
+  font-style: normal;
+  font-weight: 800;
+  src: local(''), url('/fonts/NanumSquareNeoTTF-dEb.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: "NanumSquareNeo";
+  font-style: normal;
+  font-weight: 900;
+  src: local(''), url('/fonts/NanumSquareNeoTTF-eHv.woff2') format('woff2');
+}
+
+@layer base {
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: "NanumSquareNeo", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+      Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
 }

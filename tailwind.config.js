@@ -4,12 +4,30 @@ module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        naver: "#03C75A"
+      },
       fontFamily: {
         roboto: ["Roboto", ...defaultTheme.fontFamily.sans],
-        notoSans: ["Noto Sans KR", ...defaultTheme.fontFamily.sans],
+        nanumSquareNeo: ["NanumSquareNeo", ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  darkMode: 'class',
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/colors/themes")["[data-theme=light]"],
+          primary: "#65a30d",
+        },
+        dark: {
+          ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
+          primary: "#65a30d",
+          "base-100": "#25282b",
+        },
+      },
+    ],
+  },
+  darkMode: ['class', '[data-theme="dark"]']
 };
