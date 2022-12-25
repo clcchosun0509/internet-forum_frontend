@@ -10,8 +10,6 @@ const Home = () => {
 
 
 export const getServerSideProps:GetServerSideProps = async (ctx) => {
-  console.log("ctx", ctx.req.cookies);
-
   return {
     props:{
       data:null

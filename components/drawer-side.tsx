@@ -1,24 +1,20 @@
+import { Board } from "../types/board";
 import { Cookies } from "../types/cookies";
+import MenuItems from "./menu-items";
 import ProfileCard from "./ui/profile-card";
 
 type Props = {
   cookies: Cookies;
+  activeLink?: Board;
 };
-const DrawerSide = ({ cookies }: Props) => {
-  console.log("cookies", cookies);
-
+const DrawerSide = ({ cookies, activeLink }: Props) => {
   return (
     <div className="drawer-side">
       <label htmlFor="my-drawer" className="drawer-overlay"></label>
       <div className="bg-base-100 flex flex-col w-72 text-base-content">
         <ProfileCard cookies={cookies} />
         <ul className="menu p-4">
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <MenuItems activeLink={activeLink} />
         </ul>
       </div>
     </div>

@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider attribute="class">
-          <Layout cookies={pageProps.cookies}>
+          <Layout cookies={pageProps.cookies} boardId={pageProps.boardId}>
             <Component {...pageProps} />
           </Layout>
           <ToastContainer
@@ -54,7 +54,7 @@ App.getInitialProps = async ({ Component, ctx }: CustomContext) => {
   }
 
   let cookies: Cookies = ctx?.req?.cookies;
-  pageProps = { ...pageProps, cookies };
+  pageProps = { ...pageProps, cookies, boardId: ctx.query.boardId };
 
   return { pageProps };
 };

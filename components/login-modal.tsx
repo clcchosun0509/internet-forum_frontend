@@ -5,7 +5,7 @@ import naverLogo from "../public/images/naver-icon.png";
 const LoginModal = () => {
   return (
     <label htmlFor="login-modal" className="modal cursor-pointer">
-      <label htmlFor="" className="flex flex-col modal-box w-full mx-4 max-w-full items-center">
+      <label htmlFor="" className="flex flex-col modal-box w-full mx-4 max-w-[400px] items-center">
         <div className="flex flex-col w-max">
           <Image
             src={hahahaLogo}
@@ -26,7 +26,7 @@ const LoginModal = () => {
         </button>
         <div className="divider" />
         <div className="modal-action">
-          <label htmlFor="login-modal" className="text-lime-600 dark:text-lime-300 font-extrabold">
+          <label htmlFor="login-modal" className="text-lime-600 dark:text-lime-300 font-extrabold cursor-pointer">
             닫기
           </label>
         </div>
