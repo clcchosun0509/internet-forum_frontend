@@ -1,5 +1,6 @@
 import { Board, boards } from "../../types/board";
 import { Cookies } from "../../types/cookies";
+import { isValidBoard } from "../../utils/utils";
 import DrawerSide from "../drawer-side";
 import LoginModal from "../login-modal";
 import Footer from "./footer";
@@ -15,7 +16,7 @@ type Props = {
 
 const Layout = ({ cookies, children, boardId }: Props) => {
   let activeLink:Board | undefined = undefined;
-  if (typeof boardId === "string" && boards.has(boardId)) {
+  if (isValidBoard(boardId)) {
     activeLink = boardId as Board;
   }
 
@@ -23,9 +24,9 @@ const Layout = ({ cookies, children, boardId }: Props) => {
     <>
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content flex flex-col items-center">
           <Header loggedIn={cookies.logged_in === "true"} activeLink={activeLink} />
-          <main className="h-[2000px]">{children}</main>
+          <main className="h-[2000px] w-full max-w-7xl">{children}</main>
           <Footer />
         </div>
         <DrawerSide cookies={cookies} activeLink={activeLink} />

@@ -12,7 +12,7 @@ type Props = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTML
 const MenuItem = ({ className, horizontal, active, link, children }: Props) => {
   return (
     <li className={horizontal && active ? `border-b-2 border-white pt-[2px] text-white ${className}` : className}>
-      <Link href={link} className={!horizontal && active ? "active" : ""}>
+      <Link href={`/${link}`} className={!horizontal && active ? "active" : ""}>
         {children}
       </Link>
     </li>

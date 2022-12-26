@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Board } from "../types/board";
+import { ReactNode } from "react";
+import { Board, boardTitle, boards } from "../types/board";
 import MenuItem from "./ui/menu-item";
 
 type Props = {
@@ -8,20 +8,21 @@ type Props = {
 };
 
 const MenuItems = ({ horizontal, activeLink }: Props) => {
+  const menuItems = () => {
+    const result: ReactNode[] = [];
+    boards.forEach((board) => {
+      result.push(
+        <MenuItem key={board} horizontal={horizontal} active={activeLink === board} link={board}>
+          {boardTitle[board]}
+        </MenuItem>
+      );
+    });
+    return result;
+  };
+
   return (
     <>
-      <MenuItem horizontal={horizontal} active={activeLink === Board.Hahaha} link={Board.Hahaha}>
-        하하하
-      </MenuItem>
-      <MenuItem horizontal={horizontal} active={activeLink === Board.Free} link={Board.Free}>
-        자유롭게
-      </MenuItem>
-      <MenuItem horizontal={horizontal} active={activeLink === Board.Game} link={Board.Game}>
-        게임
-      </MenuItem>
-      <MenuItem horizontal={horizontal} active={activeLink === Board.Hobby} link={Board.Hobby}>
-        취미
-      </MenuItem>
+      {menuItems()}
     </>
   );
 };
