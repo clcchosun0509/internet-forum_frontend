@@ -1,9 +1,9 @@
-import { Board } from "../types/board";
+import { BoardId } from "../types/board";
 import MenuItems from "./menu-items";
 
 type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   className?: string;
-  activeLink?: Board;
+  activeLink?: BoardId;
 };
 
 const HeaderMenu = ({ className, activeLink }: Props) => {

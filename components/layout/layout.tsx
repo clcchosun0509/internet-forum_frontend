@@ -1,4 +1,4 @@
-import { Board, boards } from "../../types/board";
+import { BoardId } from "../../types/board";
 import { Cookies } from "../../types/cookies";
 import { isValidBoard } from "../../utils/utils";
 import DrawerSide from "../drawer-side";
@@ -15,9 +15,9 @@ type Props = {
 
 
 const Layout = ({ cookies, children, boardId }: Props) => {
-  let activeLink:Board | undefined = undefined;
+  let activeLink:BoardId | undefined = undefined;
   if (isValidBoard(boardId)) {
-    activeLink = boardId as Board;
+    activeLink = boardId as BoardId;
   }
 
   return (

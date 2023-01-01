@@ -2,31 +2,25 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../public/images/hahaha.png";
-import Button from "../ui/button";
+import AuthButton from "../ui/auth-button";
 import { useLogoutMutation } from "../../service/auth";
 import { useRouter } from "next/router";
-import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import HeaderMenu from "../header-menu";
-import { Board } from "../../types/board";
+import { BoardId } from "../../types/board";
 
 type Props = {
   loggedIn: boolean;
-  activeLink?: Board;
+  activeLink?: BoardId;
 };
 
 const Header = ({ loggedIn, activeLink }: Props) => {
   const { mutate: logout } = useLogoutMutation();
-  const [, , removeCookie] = useCookies();
   const router = useRouter();
 
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
-        removeCookie("logged_in");
-        removeCookie("email");
-        removeCookie("username");
-        removeCookie("avatar");
         router.push("/");
       },
       onError: () => {
@@ -53,13 +47,13 @@ const Header = ({ loggedIn, activeLink }: Props) => {
           <HeaderMenu activeLink={activeLink} className="hidden sm:inline-flex sm:h-full" />
         </div>
         {loggedIn ? (
-          <Button onClick={handleLogout} className="sm:mr-4">
+          <AuthButton onClick={handleLogout} className="sm:mr-4">
             로그아웃
-          </Button>
+          </AuthButton>
         ) : (
-          <Button htmlFor="login-modal" className="sm:mr-4">
+          <AuthButton htmlFor="login-modal" className="sm:mr-4">
             로그인
-          </Button>
+          </AuthButton>
         )}
       </div>
     </header>

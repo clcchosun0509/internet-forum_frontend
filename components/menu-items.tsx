@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { Board, boardTitle, boards } from "../types/board";
+import { BoardId, boardTitle, boards } from "../types/board";
 import MenuItem from "./ui/menu-item";
 
 type Props = {
   horizontal?: boolean;
-  activeLink?: Board;
+  activeLink?: BoardId;
 };
 
 const MenuItems = ({ horizontal, activeLink }: Props) => {
