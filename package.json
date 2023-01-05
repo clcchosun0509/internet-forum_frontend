@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "cross-env PORT=3020 NODE_ENV=development next dev",
-    "build": "cross-env NODE_ENV=production next build",
+    "build": "next build",
     "clean": "npx rimraf .next",
-    "start": "npm run clean && npm run build && cross-env NODE_ENV=production next start -p 3031",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
