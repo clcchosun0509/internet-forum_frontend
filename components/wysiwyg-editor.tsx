@@ -2,7 +2,7 @@ import * as React from "react";
 import ReactQuill, { Quill, ReactQuillProps } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { RangeStatic } from "quill";
-import api from "../service/api";
+import { clientApi } from "../service/api";
 import { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
@@ -39,7 +39,7 @@ const WysiwygEditor = ({ html, setHtml, className, ...props }: Props) => {
       formData.append("imageFile", files[0]);
       let res: AxiosResponse<any, any>;
       try {
-        res = await api.post("/api/image/upload", formData);
+        res = await clientApi.post("/api/image/upload", formData);
       } catch (err) {
         toast.error("이미지를 업로드하는데 실패하였습니다.");
         return;

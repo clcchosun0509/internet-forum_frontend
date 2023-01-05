@@ -1,5 +1,5 @@
 import React from "react";
-import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppContext, AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider attribute="class">
           <Layout cookies={pageProps.cookies} boardId={pageProps.boardId}>
             <Component {...pageProps} />
@@ -42,7 +41,6 @@ export default function App({ Component, pageProps }: AppProps) {
             closeButton={CloseButton}
           />
         </ThemeProvider>
-      </Hydrate>
     </QueryClientProvider>
   );
 }

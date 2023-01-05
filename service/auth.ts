@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import api from "./api";
+import { clientApi } from "./api";
 
 export const useLogoutMutation = () => {
-  return useMutation(() => api.post("/api/auth/logout"));
+  return useMutation(() => clientApi.post("/api/auth/logout"));
 };
