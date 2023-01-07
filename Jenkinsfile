@@ -43,7 +43,7 @@ pipeline{
       steps{
         container('docker'){
           script{
-            def dockerImage = docker.build("${env.REGISTRY}:${env.BUILD_NUMBER}", "--target runner --build-arg NEXT_PUBLIC_API_URL=\"http://hahahaforum.com\" --build-arg NEXT_PUBLIC_API_URL_SSL=\"https://hahahaforum.com\" -f ./Dockerfile .")
+            def dockerImage = docker.build("${env.REGISTRY}:${env.BUILD_NUMBER}", "--target runner --build-arg NEXT_PUBLIC_API_URL=\"https://hahahaforum.com\" -f ./Dockerfile .")
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             dockerImage.push("${env.BUILD_NUMBER}")
             dockerImage.push('latest')

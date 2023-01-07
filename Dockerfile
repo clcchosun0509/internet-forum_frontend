@@ -12,8 +12,7 @@ COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 
 ARG NEXT_PUBLIC_API_URL
-ARG NEXT_PUBLIC_API_URL_SSL
-RUN NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL NEXT_PUBLIC_API_URL_SSL=$NEXT_PUBLIC_API_URL_SSL \
+RUN NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
     npm run build && npm install --production --ignore-scripts --prefer-offline
 
 FROM node:alpine AS runner

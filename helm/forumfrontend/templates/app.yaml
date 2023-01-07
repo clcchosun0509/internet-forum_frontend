@@ -27,7 +27,7 @@ kind: Service
 metadata:
   name: forumfrontend-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: forumfrontend
   ports:

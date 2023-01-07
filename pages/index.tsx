@@ -1,12 +1,12 @@
 import { GetServerSideProps } from "next";
-import { clientApi } from "../service/api";
+import api from "../service/api";
 
 const Home = () => {
   return (
     <h1 className="text-3xl font-bold underline font-notoSans">
       <button
         onClick={async () => {
-          const data = await clientApi.get("/api/auth/status");
+          const data = await api.get("/api/auth/status");
           console.log("status", data.data);
         }}
       >

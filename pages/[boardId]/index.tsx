@@ -14,9 +14,10 @@ type Props = {
   boardId: BoardId;
   boardTitle: string;
   boardDescription: string;
+  loggedIn: boolean;
 };
 
-const Board = ({ posts, boardId, boardTitle, boardDescription }: Props) => {
+const Board = ({ posts, boardId, boardTitle, boardDescription, loggedIn }: Props) => {
   const router = useRouter();
 
   const handlePostItemClick = (postId: number) => {
@@ -50,13 +51,17 @@ const Board = ({ posts, boardId, boardTitle, boardDescription }: Props) => {
     <BoardLayout boardId={boardId} boardTitle={boardTitle} boardDescription={boardDescription}>
       <div>{postItems}</div>
       <Pagination className="mt-2 mb-10" meta={posts.meta} onClickPagination={handlePagination} />
-      <Button onClick={handleWritePost}>글쓰기</Button>
+      {loggedIn && <Button onClick={handleWritePost}>글쓰기</Button>}
     </BoardLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { params, query } = ctx;
+  const {
+    params,
+    query,
+    req,
+  } = ctx;
 
   const boardIdParam = params?.boardId;
   const page = parseParamToIntOrNull(query.page) || 1;
@@ -77,6 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       boardId,
       boardTitle: boardTitle[boardId],
       boardDescription: boardDescription[boardId],
+      loggedIn: req.cookies.logged_in === "true",
     },
   };
 };

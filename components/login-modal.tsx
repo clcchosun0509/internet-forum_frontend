@@ -18,7 +18,7 @@ const LoginModal = () => {
         <button
           className="flex flex-row items-center bg-naver text-white p-3 py-2 pr-6 rounded-lg font-bold"
           onClick={() => {
-            window.open(`${process.env.NEXT_PUBLIC_API_URL_SSL}/api/auth/naver`, "_self");
+            window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/naver`, "_self");
           }}
         >
           <Image src={naverLogo} alt="main logo" className="w-10 h-10" />
