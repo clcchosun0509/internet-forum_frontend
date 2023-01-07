@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BoardId } from "../../types/board";
+import { addClassName } from "../../utils/utils";
 
 type Props = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> & {
   className?: string;
@@ -11,7 +12,7 @@ type Props = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTML
 
 const MenuItem = ({ className, horizontal, active, link, children }: Props) => {
   return (
-    <li className={horizontal && active ? `border-b-2 border-white pt-[2px] text-white ${className}` : className}>
+    <li className={horizontal && active ? `border-b-2 border-white pt-[2px] text-white${addClassName(className)}` : className}>
       <Link
         href={`/${link}`}
         className={!horizontal && active ? "active" : ""}

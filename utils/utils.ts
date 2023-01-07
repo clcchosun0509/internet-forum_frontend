@@ -25,3 +25,11 @@ export const parseParamToIntOrNull = (param: string | string[] | undefined) => {
 export const getRelativeTime = (date: Date) => {
   return moment(date).locale("ko").fromNow();
 }
+
+export const addClassName = (className?: string) => {
+  if (className) {
+    return " " + className;
+  } else {
+    return "";
+  }
+}

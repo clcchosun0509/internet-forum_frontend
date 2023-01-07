@@ -1,3 +1,5 @@
+import { addClassName } from "../../utils/utils";
+
 type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
   className?: string;
   children: React.ReactNode | string;
@@ -5,7 +7,7 @@ type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const Button = ({ className, children, ...props }: Props) => {
   return (
-    <button className={`btn btn-ghost bg-base-300 transition-none ${className}`} {...props}>
+    <button className={`btn btn-ghost bg-base-300 transition-none${addClassName(className)}`} {...props}>
       {children}
     </button>
   );

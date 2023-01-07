@@ -5,6 +5,7 @@ import { RangeStatic } from "quill";
 import { clientApi } from "../service/api";
 import { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { addClassName } from "../utils/utils";
 
 const fontSizes = ["14px", "16px", "20px", "24px", "32px", "42px", "54px", "68px", "84px", "98px"];
 const Size = Quill.import("attributors/style/size");
@@ -119,7 +120,7 @@ const WysiwygEditor = ({ html, setHtml, className, ...props }: Props) => {
       [&_.ql-snow_.ql-picker-label]:dark:text-gray-200 [&_.ql-snow_.ql-stroke]:dark:stroke-gray-200
       [&_.ql-snow_.ql-fill]:dark:fill-gray-200 [&_.ql-snow_.ql-editor_img]:inline 
       [&_.ql-snow_.ql-picker.ql-size_.ql-picker-item]:before:content-[attr(data-value)]
-      [&_.ql-snow_.ql-picker.ql-size_.ql-picker-label]:before:content-[attr(data-value)] ${className}`}
+      [&_.ql-snow_.ql-picker.ql-size_.ql-picker-label]:before:content-[attr(data-value)]${addClassName(className)}`}
       {...props}
     />
   );

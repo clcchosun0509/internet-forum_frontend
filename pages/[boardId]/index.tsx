@@ -7,6 +7,7 @@ import BoardLayout from "../../components/layout/board-layout";
 import PostItem from "../../components/ui/post-item";
 import Button from "../../components/ui/button";
 import { PostsResponse } from "../../types/post";
+import Pagination from "../../components/pagination";
 
 type Props = {
   posts: PostsResponse;
@@ -26,6 +27,12 @@ const Board = ({ posts, boardId, boardTitle, boardDescription }: Props) => {
     router.push(`/${boardId}/write`);
   };
 
+  const handlePagination = (page: number, isSamePage: boolean) => {
+    if (!isSamePage) {
+      router.push(`/${boardId}?page=${page}`);
+    }
+  };
+
   const postItems = posts.items.map((post) => {
     return (
       <PostItem
@@ -42,6 +49,7 @@ const Board = ({ posts, boardId, boardTitle, boardDescription }: Props) => {
   return (
     <BoardLayout boardId={boardId} boardTitle={boardTitle} boardDescription={boardDescription}>
       <div>{postItems}</div>
+      <Pagination className="mt-2 mb-10" meta={posts.meta} onClickPagination={handlePagination} />
       <Button onClick={handleWritePost}>글쓰기</Button>
     </BoardLayout>
   );
