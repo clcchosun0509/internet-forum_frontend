@@ -12,7 +12,6 @@ pipeline{
   }
 
   environment {
-    BUILD_IMAGE_TAG = "build-image-tag:latest"
     REGISTRY = "clcchosun0509/forumfrontend"
     REGISTRY_CREDENTIAL = 'dockerhub'
     HELM_APP_NAME = 'forumfrontend-stack'
@@ -26,15 +25,6 @@ pipeline{
         container('docker'){
           sh 'docker version'
           sh 'docker info'
-        }
-      }
-    }
-
-    stage('Build'){
-      steps{
-        container('docker'){
-          sh "docker build --target builder --tag ${env.BUILD_IMAGE_TAG} -f ./Dockerfile ."
-          sh "docker run --rm ${env.BUILD_IMAGE_TAG}"
         }
       }
     }
@@ -65,7 +55,6 @@ pipeline{
     stage('Clean Docker Images'){
       steps{
         container('docker'){
-          sh "docker rmi ${env.BUILD_IMAGE_TAG}"
           sh "docker rmi ${env.REGISTRY}:${env.BUILD_NUMBER}"
         }
       }
