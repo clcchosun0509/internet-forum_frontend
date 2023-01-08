@@ -10,7 +10,7 @@ export const useWritePostMutation = () => {
         await api.post<Post>("/api/post", {
           title,
           content,
-          boardId: boardId,
+          boardId,
         })
       ).data
   );
@@ -22,4 +22,22 @@ export const getPosts = async (boardId: string, page: number) => {
 
 export const getPost = async (postId: number) => {
   return (await api.get<Post>(`/api/post/${postId}`)).data;
+};
+
+export const useDeletePostMutation = () => {
+  return useMutation(async ({ postId }: { postId: number }) => {
+    await api.delete(`/api/post/${postId}`);
+  });
+};
+
+export const useEditPostMutation = () => {
+  return useMutation(
+    async ({ title, content, postId }: { title: string; content: string; postId: number }) =>
+      (
+        await api.patch<Post>(`/api/post/${postId}`, {
+          title,
+          content,
+        })
+      ).data
+  );
 };

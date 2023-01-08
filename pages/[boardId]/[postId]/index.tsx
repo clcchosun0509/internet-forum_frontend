@@ -1,35 +1,28 @@
 import { GetServerSideProps } from "next";
 import sanitizeHtml from "sanitize-html";
-import BoardLayout from "../../components/layout/board-layout";
-import { getPost } from "../../service/post";
-import { BoardId, boardDescription, boardTitle } from "../../types/board";
-import { getRelativeTime, isValidBoard, parseParamToIntOrNull } from "../../utils/utils";
-import Image from "next/image";
-import ViewCount from "../../components/ui/view-count";
-import { Post } from "../../types/post";
+import BoardLayout from "../../../components/layout/board-layout";
+import { getPost } from "../../../service/post";
+import { BoardId, boardDescription, boardTitle } from "../../../types/board";
+import { isValidBoard, parseParamToIntOrNull } from "../../../utils/utils";
+import { Post } from "../../../types/post";
+import PostInfoHead from "../../../components/ui/post-info-head";
+import PostDropdown from "../../../components/post-dropdown";
 
 type Props = {
   post: Post;
   boardId: BoardId;
   boardTitle: string;
   boardDescription: string;
+  isSameUser: boolean;
 };
 
-const Post = ({ post, boardId, boardTitle, boardDescription }: Props) => {
+const Post = ({ post, boardId, boardTitle, boardDescription, isSameUser }: Props) => {
   return (
     <BoardLayout boardId={boardId} boardTitle={boardTitle} boardDescription={boardDescription}>
       <h1 className="font-bold text-2xl text-black dark:text-white mb-3">{post.title}</h1>
-      <div className="flex flex-row items-center text-gray-500 text-sm sm:text-base">
-        <Image
-          className="w-6 h-6 mr-2 rounded-full sm:w-8 sm:h-8"
-          src={post.author.avatar}
-          width={32}
-          height={32}
-          alt="user avatar"
-        />
-        <p className="mr-3">{post.author.username}</p>
-        <p className="mr-3">{getRelativeTime(post.createdAt)}</p>
-        <ViewCount viewCount={post.viewCount} />
+      <div className="flex flex-row items-center justify-between text-gray-500 text-sm sm:text-base">
+        <PostInfoHead post={post} />
+        {isSameUser && <PostDropdown postId={post.id} boardId={boardId} />}
       </div>
       <div className="divider" />
       <div
@@ -37,12 +30,14 @@ const Post = ({ post, boardId, boardTitle, boardDescription }: Props) => {
           __html: sanitizeHtml(post.content, { allowedTags: false, allowedAttributes: false }),
         }}
       />
+
+      <div className="divider" />
     </BoardLayout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { params } = ctx;
+  const { params, req } = ctx;
 
   const boardIdParam = params?.boardId;
   const postId = parseParamToIntOrNull(params?.postId);
@@ -61,12 +56,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
+  let isSameUser = true;
+  if (req.cookies.logged_in !== "true") {
+    isSameUser = false;
+  }
+  if (req.cookies.username !== post.author.username) {
+    isSameUser = false;
+  }
+
   return {
     props: {
       post,
       boardId,
       boardTitle: boardTitle[boardId],
       boardDescription: boardDescription[boardId],
+      isSameUser,
     },
   };
 };

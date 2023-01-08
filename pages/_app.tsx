@@ -51,7 +51,12 @@ App.getInitialProps = async ({ Component, ctx }: CustomContext) => {
     pageProps = await Component.getInitialProps(ctx);
   }
 
-  let cookies: Cookies = ctx?.req?.cookies;
+  let cookies: Cookies | undefined = ctx?.req?.cookies;
+  if (!cookies) {
+    console.log("cookie is undefined");
+    cookies = {};
+  }
+
   pageProps = { ...pageProps, cookies, boardId: ctx.query.boardId };
 
   return { pageProps };
