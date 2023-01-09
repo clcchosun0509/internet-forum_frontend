@@ -9,6 +9,7 @@ export interface Post {
   content: string;
   boardId: BoardId;
   viewCount: number;
+  likeCount: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

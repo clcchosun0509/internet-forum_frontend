@@ -41,3 +41,7 @@ export const useEditPostMutation = () => {
       ).data
   );
 };
+
+export const useLikePostMutation = () => {
+  return useMutation(async ({ postId }: { postId: number }) => await api.post("/api/like", { postId }));
+};

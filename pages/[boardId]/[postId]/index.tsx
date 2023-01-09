@@ -1,12 +1,15 @@
 import { GetServerSideProps } from "next";
 import sanitizeHtml from "sanitize-html";
 import BoardLayout from "../../../components/layout/board-layout";
-import { getPost } from "../../../service/post";
+import { getPost, useLikePostMutation } from "../../../service/post";
 import { BoardId, boardDescription, boardTitle } from "../../../types/board";
 import { isValidBoard, parseParamToIntOrNull } from "../../../utils/utils";
 import { Post } from "../../../types/post";
 import PostInfoHead from "../../../components/ui/post-info-head";
 import PostDropdown from "../../../components/post-dropdown";
+import LikeButton from "../../../components/ui/like-button";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 type Props = {
   post: Post;
@@ -17,6 +20,27 @@ type Props = {
 };
 
 const Post = ({ post, boardId, boardTitle, boardDescription, isSameUser }: Props) => {
+  const [likeCount, setLikeCount] = useState<number>(post.likeCount);
+  const { mutate: likePost } = useLikePostMutation();
+
+  const handleLikePost = () => {
+    likePost(
+      { postId: post.id },
+      {
+        onSuccess: () => {
+          setLikeCount((prevLikeCount) => prevLikeCount + 1);
+        },
+        onError: (err: any) => {
+          if (err?.response?.status === 403) {
+            toast.error("로그인을 해주세요.");
+          } else {
+            toast.error(err?.response?.data?.message);
+          }
+        },
+      }
+    );
+  };
+
   return (
     <BoardLayout boardId={boardId} boardTitle={boardTitle} boardDescription={boardDescription}>
       <h1 className="font-bold text-2xl text-black dark:text-white mb-3">{post.title}</h1>
@@ -30,7 +54,9 @@ const Post = ({ post, boardId, boardTitle, boardDescription, isSameUser }: Props
           __html: sanitizeHtml(post.content, { allowedTags: false, allowedAttributes: false }),
         }}
       />
-
+      <div className="flex justify-center mt-4">
+        <LikeButton likeCount={likeCount} onClick={handleLikePost} />
+      </div>
       <div className="divider" />
     </BoardLayout>
   );
