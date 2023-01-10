@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import HeaderMenu from "../header-menu";
 import { BoardId } from "../../types/board";
+import Cookies from "js-cookie";
 
 type Props = {
   loggedIn: boolean;
@@ -24,7 +25,8 @@ const Header = ({ loggedIn, activeLink }: Props) => {
         router.push("/");
       },
       onError: () => {
-        toast.error("로그아웃에 실패하였습니다.");
+        Cookies.remove("logged_in");
+        router.push("/");
       },
     });
   };

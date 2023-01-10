@@ -9,7 +9,7 @@ type Props = {
 const ProfileCard = ({ cookies }: Props) => {
   let avatarImageSrc: StaticImageData | string = userIcon;
   let username = "게스트";
-  let email = "로그아웃 상태입니다.";
+  let email = "로그아웃 상태입니다";
   if (cookies.logged_in) {
     if (cookies.avatar) {
       avatarImageSrc = cookies.avatar;

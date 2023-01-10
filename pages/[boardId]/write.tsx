@@ -31,7 +31,7 @@ const PostWrite = ({ boardId, boardTitle, boardDescription }: Props) => {
           router.push(`/${boardId}/${post.id}`);
         },
         onError: () => {
-          toast.error("글 작성에 실패하였습니다.");
+          toast.error("글 작성에 실패하였습니다");
         },
       }
     );

@@ -42,7 +42,7 @@ const WysiwygEditor = ({ html, setHtml, className, ...props }: Props) => {
       try {
         res = await api.post("/api/image/upload", formData);
       } catch (err) {
-        toast.error("이미지를 업로드하는데 실패하였습니다.");
+        toast.error("이미지를 업로드하는데 실패하였습니다");
         return;
       }
 

@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Post, PostsResponse } from "../types/post";
 import api from "./api";
 import _ from "lodash";
+import { CommentsResponse } from "../types/comment";
 
 export const useWritePostMutation = () => {
   return useMutation(
@@ -44,4 +45,32 @@ export const useEditPostMutation = () => {
 
 export const useLikePostMutation = () => {
   return useMutation(async ({ postId }: { postId: number }) => await api.post("/api/like", { postId }));
+};
+
+export const getComments = async (postId: number, page: number) => {
+  return (await api.get<CommentsResponse>(`/api/comment?postId=${postId}&page=${page}`)).data;
+};
+
+export const useWriteCommentMutation = () => {
+  return useMutation(
+    async ({ postId, content }: { postId: number; content: string }) =>
+      (
+        await api.post<Post>("/api/comment", {
+          postId,
+          content,
+        })
+      ).data
+  );
+};
+
+export const useWriteCommentReplyMutation = () => {
+  return useMutation(
+    async ({ commentId, content }: { commentId: string; content: string }) =>
+      (
+        await api.post<Post>("/api/comment/reply", {
+          commentId,
+          content,
+        })
+      ).data
+  );
 };

@@ -1,4 +1,5 @@
 import { BoardId } from "./board";
+import { PaginationMeta } from "./common";
 import { User } from "./user";
 
 export interface Post {
@@ -17,11 +18,5 @@ export interface Post {
 
 export interface PostsResponse {
   items: Post[];
-  meta: {
-    totalItems: number;
-    itemCount: number;
-    itemsPerPage: number;
-    totalPages: number;
-    currentPage: number;
-  };
+  meta: PaginationMeta;
 }

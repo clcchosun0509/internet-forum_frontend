@@ -24,7 +24,7 @@ const PostDropdown = ({ postId, boardId }: Props) => {
           router.push(`/${boardId}`);
         },
         onError: () => {
-          toast.error("글 삭제에 실패하였습니다.");
+          toast.error("글 삭제에 실패하였습니다");
         },
       }
     );
@@ -33,7 +33,7 @@ const PostDropdown = ({ postId, boardId }: Props) => {
   return (
     <div className="dropdown dropdown-end">
       <FontAwesomeIcon tabIndex={0} icon={faEllipsis} size="2x" className="w-6 cursor-pointer align-middle" />
-      <ul tabIndex={0} className="dropdown-content menu p-1 shadow bg-base-200 rounded-md w-36">
+      <ul tabIndex={0} className="dropdown-content menu p-1 shadow bg-base-200 dark:bg-neutral text-black dark:text-white rounded-md w-36">
         <li>
           <Link href={`/${boardId}/${postId}/edit`}>수정하기</Link>
         </li>

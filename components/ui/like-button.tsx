@@ -10,7 +10,7 @@ type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElemen
 const LikeButton = ({ className, likeCount, ...props }: Props) => {
   return (
     <button className={`btn btn-outline btn-primary h-11 min-h-0 px-4${addClassName(className)}`} {...props}>
-      <FontAwesomeIcon tabIndex={0} icon={faThumbsUp} size="2x" className="w-4 mr-2" />
+      <FontAwesomeIcon tabIndex={0} icon={faThumbsUp} size="2x" className="w-4 mr-2 outline-none" />
       <p>{`추천 ${likeCount}`}</p>
     </button>
   );
