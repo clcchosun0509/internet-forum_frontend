@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["ssl.pstatic.net"]
+    domains: ["ssl.pstatic.net", "avatars.githubusercontent.com"]
   }
 }
 

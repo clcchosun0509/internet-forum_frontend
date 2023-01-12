@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import BoardLayout from "../../components/layout/board-layout";
 import Button from "../../components/ui/button";
+import Input from "../../components/ui/input";
 
 const WysiwygEditor = dynamic(() => import("../../components/wysiwyg-editor"), { ssr: false });
 
@@ -39,15 +40,12 @@ const PostWrite = ({ boardId, boardTitle, boardDescription }: Props) => {
 
   return (
     <BoardLayout boardId={boardId} boardTitle={boardTitle} boardDescription={boardDescription}>
-      <input
-        type="text"
-        placeholder="제목"
-        className="input input-bordered mt-0 mb-6 border-[#ccc]/100 transition-none"
+      <Input placeholder="제목"
+        className="mt-0 mb-6"
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
-        }}
-      />
+        }} />
       <WysiwygEditor className="mb-6" html={html} setHtml={setHtml} />
       <Button onClick={handleWritePost}>등록</Button>
     </BoardLayout>

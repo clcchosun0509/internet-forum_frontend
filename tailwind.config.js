@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        naver: "#03C75A"
+        naver: "#03C75A",
+        github: "#24292f"
       },
       fontFamily: {
         roboto: ["Roboto", ...defaultTheme.fontFamily.sans],

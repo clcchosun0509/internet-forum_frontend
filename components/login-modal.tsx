@@ -1,6 +1,7 @@
 import Image from "next/image";
 import hahahaLogo from "../public/images/hahaha.png";
 import naverLogo from "../public/images/naver-icon.png";
+import githubLogo from "../public/images/github-icon.png";
 
 const LoginModal = () => {
   return (
@@ -16,13 +17,24 @@ const LoginModal = () => {
         </div>
         <div className="divider" />
         <button
-          className="flex flex-row items-center bg-naver text-white p-3 py-2 pr-6 rounded-lg font-bold"
+          className="flex flex-row items-center bg-naver text-white p-3 py-2 pr-6 rounded-lg font-bold mb-2"
           onClick={() => {
             window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/naver`, "_self");
           }}
         >
-          <Image src={naverLogo} alt="main logo" className="w-10 h-10" />
+          <Image src={naverLogo} alt="naver logo" className="w-10 h-10" />
           네이버로 로그인하기
+        </button>
+        <button
+          className="flex flex-row items-center bg-github text-white p-3 py-2 pr-6 rounded-lg font-bold"
+          onClick={() => {
+            window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/github`, "_self");
+          }}
+        >
+          <div className="flex justify-center items-center w-10 h-10">
+            <Image src={githubLogo} alt="github logo" className="w-6 h-6" />
+          </div>
+          깃허브로 로그인하기
         </button>
         <div className="divider" />
         <div className="modal-action">

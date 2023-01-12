@@ -26,7 +26,7 @@ const Layout = ({ cookies, children, boardId }: Props) => {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center">
           <Header loggedIn={cookies.logged_in === "true"} activeLink={activeLink} />
-          <main className="h-[2000px] w-full max-w-7xl">{children}</main>
+          <main className="h-[2000px] w-full max-w-7xl flex flex-col">{children}</main>
           <Footer />
         </div>
         <DrawerSide cookies={cookies} activeLink={activeLink} />

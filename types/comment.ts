@@ -9,6 +9,7 @@ export interface Comment {
   author: User;
   parentCommentId: string | null;
   parentCommentUsername: string | null;
+  parentComment: Comment;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

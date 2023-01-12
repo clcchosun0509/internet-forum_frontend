@@ -66,8 +66,8 @@ const Comment = ({ comment, boardId, postId, className }: Props) => {
         </p>
       </div>
       <div className="text-black dark:text-white flex flex-row">
-        {comment.parentCommentUsername ? (
-          <p className="bg-lime-400 px-2 rounded-full dark:bg-lime-800 text-sm flex items-center mr-2">{`@${comment.parentCommentUsername}`}</p>
+        {comment.parentComment ? (
+          <p className="bg-lime-400 px-2 rounded-full dark:bg-lime-800 text-sm flex items-center mr-2">{`@${comment.parentComment.author.username}`}</p>
         ) : null}
         <p>{comment.content}</p>
       </div>

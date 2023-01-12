@@ -115,7 +115,7 @@ const WysiwygEditor = ({ html, setHtml, className, ...props }: Props) => {
       formats={formats}
       value={html}
       onChange={(content, delta, source, editor) => setHtml(editor.getHTML())}
-      className={`[&_.ql-toolbar.ql-snow]:rounded-t-lg [&_.ql-container.ql-snow]:rounded-b-lg [&_.ql-editor]:h-[400px] 
+      className={`flex flex-col [&_.ql-toolbar.ql-snow]:rounded-t-lg [&_.ql-container.ql-snow]:rounded-b-lg [&_.ql-editor]:h-[400px] 
       xl:[&_.ql-editor]:h-[500px] [&_.ql-container]:text-[14px]
       [&_.ql-snow_.ql-picker-label]:dark:text-gray-200 [&_.ql-snow_.ql-stroke]:dark:stroke-gray-200
       [&_.ql-snow_.ql-fill]:dark:fill-gray-200 [&_.ql-snow_.ql-editor_img]:inline 
