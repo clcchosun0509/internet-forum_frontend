@@ -3,10 +3,12 @@ import { Post, PostsResponse } from "../types/post";
 import api from "./api";
 import _ from "lodash";
 import { CommentsResponse } from "../types/comment";
+import { BoardId } from "../types/board";
+import { SearchType } from "../types/search";
 
 export const useWritePostMutation = () => {
   return useMutation(
-    async ({ title, content, boardId }: { title: string; content: string; boardId: string }) =>
+    async ({ title, content, boardId }: { title: string; content: string; boardId: BoardId }) =>
       (
         await api.post<Post>("/api/post", {
           title,
@@ -17,8 +19,20 @@ export const useWritePostMutation = () => {
   );
 };
 
-export const getPosts = async (boardId: string, page: number) => {
+export const getPosts = async (boardId: BoardId, page: number) => {
   return (await api.get<PostsResponse>(`/api/board/${boardId}?page=${page}`)).data;
+};
+
+export const getPostsBySearch = async (boardId: BoardId, searchType: SearchType, keyword: string, page: number) => {
+  return (
+    await api.get<PostsResponse>(`/api/search/${searchType}`, {
+      params: {
+        query: keyword,
+        boardId,
+        page,
+      },
+    })
+  ).data;
 };
 
 export const getPost = async (postId: number) => {

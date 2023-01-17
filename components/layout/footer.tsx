@@ -15,7 +15,7 @@ const Footer = ({ ...props }: Props) => {
   }, [theme]);
 
   return (
-    <footer {...props} className="flex flex-col items-center m-4">
+    <footer {...props} className="flex flex-col items-center m-4 mt-24">
       <button className="btn" onClick={toggleTheme}>
         색상 반전
       </button>

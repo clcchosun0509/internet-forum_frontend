@@ -1,9 +1,17 @@
 import { boards } from "../types/board";
 import moment from "moment";
 import "moment/locale/ko";
+import { searchTypes } from "../types/search";
 
 export const isValidBoard = (id: string | string[] | undefined) => {
   if (typeof id === "string" && boards.has(id as any)) {
+    return true;
+  }
+  return false;
+};
+
+export const isValidSearchType = (type: string | string[] | undefined) => {
+  if (typeof type === "string" && searchTypes.has(type as any)) {
     return true;
   }
   return false;
@@ -20,6 +28,14 @@ export const parseParamToIntOrNull = (param: string | string[] | undefined) => {
   }
 
   return parsed;
+};
+
+export const parseParamToString = (param: string | string[] | undefined) => {
+  if (typeof param !== "string") {
+    return "";
+  }
+
+  return param;
 };
 
 export const getRelativeTime = (date: Date) => {
