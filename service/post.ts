@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Post, PostsResponse } from "../types/post";
 import api from "./api";
 import _ from "lodash";
-import { CommentsResponse } from "../types/comment";
+import { Comment, CommentsResponse } from "../types/comment";
 import { BoardId } from "../types/board";
 import { SearchType } from "../types/search";
 
@@ -83,6 +83,23 @@ export const useWriteCommentReplyMutation = () => {
       (
         await api.post<Post>("/api/comment/reply", {
           commentId,
+          content,
+        })
+      ).data
+  );
+};
+
+export const useDeleteCommentMutation = () => {
+  return useMutation(async ({ commentId }: { commentId: string }) => {
+    await api.delete(`/api/comment/${commentId}`);
+  });
+};
+
+export const useEditCommentMutation = () => {
+  return useMutation(
+    async ({ content, commentId }: { content: string; commentId: string }) =>
+      (
+        await api.patch<Comment>(`/api/comment/${commentId}`, {
           content,
         })
       ).data

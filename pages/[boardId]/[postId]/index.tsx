@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { CommentsResponse } from "../../../types/comment";
 import Comment from "../../../components/comment";
 import Pagination from "../../../components/pagination";
+import uuid from "react-uuid";
 
 type Props = {
   post: Post;
@@ -24,10 +25,10 @@ type Props = {
   boardId: BoardId;
   boardTitle: string;
   boardDescription: string;
-  isSameUser: boolean;
+  username?: string;
 };
 
-const Post = ({ post, comments, boardId, boardTitle, boardDescription, isSameUser }: Props) => {
+const Post = ({ post, comments, boardId, boardTitle, boardDescription, username }: Props) => {
   const [likeCount, setLikeCount] = useState<number>(post.likeCount);
   const [comment, setComment] = useState<string>("");
   const { mutate: likePost } = useLikePostMutation();
@@ -74,7 +75,23 @@ const Post = ({ post, comments, boardId, boardTitle, boardDescription, isSameUse
   };
 
   const commentItems = comments.items.map((comment) => {
-    return <Comment key={comment.id} comment={comment} boardId={boardId} postId={post.id} />;
+    if (comment) {
+      return (
+        <Comment
+          key={comment.id}
+          comment={comment}
+          boardId={boardId}
+          postId={post.id}
+          isSameUser={username === comment.author.username}
+        />
+      );
+    }
+    return (
+      <div key={`deleted-${uuid()}`} className="flex flex-col">
+        <p>삭제된 댓글입니다</p>
+        <div className="divider my-2" />
+      </div>
+    );
   });
 
   return (
@@ -82,7 +99,7 @@ const Post = ({ post, comments, boardId, boardTitle, boardDescription, isSameUse
       <h1 className="font-bold text-2xl text-black dark:text-white mb-3">{post.title}</h1>
       <div className="flex flex-row items-center justify-between text-gray-500 text-sm sm:text-base">
         <PostInfoHead post={post} />
-        {isSameUser && <PostDropdown postId={post.id} boardId={boardId} />}
+        {username === post.author.username && <PostDropdown postId={post.id} boardId={boardId} />}
       </div>
       <div className="divider" />
       <div
@@ -127,14 +144,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 
   const comments = await getComments(postId, commentPage);
-
-  let isSameUser = true;
-  if (req.cookies.logged_in !== "true") {
-    isSameUser = false;
-  }
-  if (req.cookies.username !== post.author.username) {
-    isSameUser = false;
-  }
+  comments.items = comments.items.map((comment) => {
+    if (comment && comment.deletedAt) {
+      return null;
+    }
+    return comment;
+  });
 
   return {
     props: {
@@ -143,7 +158,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       boardId,
       boardTitle: boardTitle[boardId],
       boardDescription: boardDescription[boardId],
-      isSameUser,
+      username: req.cookies.logged_in === "true" ? req.cookies.username : undefined,
     },
   };
 };

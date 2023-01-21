@@ -16,6 +16,6 @@ export interface Comment {
 }
 
 export interface CommentsResponse {
-  items: Comment[];
+  items: (Comment | null)[];
   meta: PaginationMeta;
 }

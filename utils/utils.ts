@@ -2,6 +2,8 @@ import { boards } from "../types/board";
 import moment from "moment";
 import "moment/locale/ko";
 import { searchTypes } from "../types/search";
+import { Comment } from "../types/comment";
+import _ from "lodash";
 
 export const isValidBoard = (id: string | string[] | undefined) => {
   if (typeof id === "string" && boards.has(id as any)) {
