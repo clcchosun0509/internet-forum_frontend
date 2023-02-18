@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 순수한 웃음을 만들어내는 커뮤니티 사이트 - 프론트엔드
+백엔드 : [백엔드 코드로 이동](https://github.com/clcchosun0509/internet-forum_backend)
 
-## Getting Started
+[Next.js](https://nextjs.org/)를 기반으로한 프론트엔드 코드입니다.
 
-First, run the development server:
+[웹사이트로 이동](https://hahahaforum.com/)하여 직접 사이트를 확인할 수 있습니다.
+## 개발스택
+- Next.js
+- Kubernetes
+- Minikube
+- Docker
+- Jenkins
+- Tailwindcss
+- WYSIWYG Editor (Quill)
+- Typescript
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 현재까지 구현된 기능
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 네이버, 깃허브 OAuth로 회원가입/로그인 (현재 깃허브만 가입 가능)
+- 로그아웃
+- 글쓰기, 글수정, 글삭제
+- 댓글쓰기, 댓글수정, 댓글삭제
+- 대댓글쓰기, 대댓글수정, 대댓글삭제
+- 제목 + 내용, 제목, 글쓴이 검색
+- 추천하기
+- 프로필 수정 (현재는 닉네임만 수정가능)
+- 다크 모드 지원
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 예제 이미지
+### 기본적인 사이트 작동 방식
+<p align="center" class="img-box">
+<img src="https://github.com/clcchosun0509/internet-forum_backend/blob/main/docs/internet-forum-example.gif" alt="internet forum app example" width=400 />
+</p>
+&nbsp;
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 검색 기능
+<p align="center" class="img-box">
+<img src="https://github.com/clcchosun0509/internet-forum_backend/blob/main/docs/internet-forum-example2.gif" alt="flowchart" width=1000 />
+</p>
